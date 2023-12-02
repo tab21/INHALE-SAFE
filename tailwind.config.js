@@ -9,7 +9,7 @@ module.exports = {
         neonBlue: "#2E91F7",
       },
       lineClamp: {
-        15: "15",
+        20: "20",
       },
     },
   },

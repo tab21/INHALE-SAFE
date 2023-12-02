@@ -1,7 +1,8 @@
 const CO_DATA = [
   {
     title: "What is carbon monoxide poisoning?",
-    para: "Carbon monoxide poisoning is a life-threatening illness that happens after breathing in fumes that contain carbon monoxide (CO). When high levels of CO enter your body, it can be deadly after only a few minutes. The most common symptoms of CO poisoning are a headache and shortness of breath. Contact emergency services immediately if you suspect you have CO exposure.",
+    para: `Carbon monoxide poisoning is a life-threatening illness that happens after breathing in fumes that contain carbon monoxide (CO). When high levels of CO enter your body, it can be deadly after only a few minutes. The most common symptoms of CO poisoning are a headache and shortness of breath. Contact emergency services immediately if you suspect you have CO exposure.
+    Carbon monoxide is an invisible, colorless and odorless gas produced when gasoline and other fuels burn (combustion). You can’t smell or taste it. CO can build up quickly and is dangerous at high levels.`,
     link: "https://my.clevelandclinic.org/health/diseases/15663-carbon-monoxide-poisoning",
   },
   {

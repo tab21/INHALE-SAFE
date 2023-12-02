@@ -53,6 +53,12 @@ const CoLevel = () => {
     ],
   });
 
+  // for setting max CO values
+  const [maxCo, setMaxCo] = useState({
+    value: 0,
+    time: "",
+  });
+
   const fetchData = async () => {
     try {
       const response = await axios.get("https://inhalesafe.vercel.app/api/get");
@@ -88,6 +94,14 @@ const CoLevel = () => {
           },
         ],
       });
+
+      // for setting max CO values
+      const maxCoValue = Math.max(...newValues);
+      const maxCoTime = newLabels[newValues.indexOf(maxCoValue)];
+      setMaxCo({
+        value: maxCoValue,
+        time: maxCoTime,
+      });
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -103,7 +117,7 @@ const CoLevel = () => {
   }, []);
 
   return (
-    <>
+    <div className="w-4/5 m-2 flex-col">
       <div className="h-4/5 flex mx-auto my-auto">
         <Line
           data={chartData}
@@ -137,7 +151,36 @@ const CoLevel = () => {
           }}
         />
       </div>
-    </>
+
+      <div className="flex h-1/5 text-white text-center">
+        <div className="w-1/2 bg-mainBlue m-2 rounded-md flex justify-center items-center">
+          <div className="text-xs">
+            <h3 className="text-bold">CURRENT CO CONCENTRATION</h3>
+            <p>
+              <span className="text-2xl">
+                {
+                  chartData.datasets[0].data[
+                    chartData.datasets[0].data.length - 1
+                  ]
+                }
+              </span>{" "}
+              ppm
+            </p>
+            <p>{chartData.labels[chartData.labels.length - 1]}</p>
+          </div>
+        </div>
+
+        <div className="w-1/2 bg-mainBlue m-2 rounded-md flex justify-center items-center">
+          <div className="text-xs">
+            <h3 className="text-bold">HIGHEST IN 24 HOURS</h3>
+            <p>
+              <span className="text-2xl">{maxCo.value}</span> ppm
+            </p>
+            <p>{maxCo.time}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

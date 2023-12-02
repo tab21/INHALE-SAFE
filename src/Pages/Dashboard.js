@@ -1,8 +1,8 @@
 import React from "react";
 
 //importing components
-import Graph from "../Components/Graph";
 import Article from "../Components/Article";
+import CoLevel from "../Components/CoLevel";
 
 //importing data
 import CO_DATA from "../Assets/Article_Data/CO";
@@ -14,9 +14,9 @@ export default function Dashboard() {
         Dashboard
       </h1>
 
-      {/* getting Co  */}
+      {/* getting Co chart and info  */}
       <div className="flex w-full">
-        <Graph />
+        <CoLevel />
         <Article {...CO_DATA[0]} />
       </div>
     </div>
