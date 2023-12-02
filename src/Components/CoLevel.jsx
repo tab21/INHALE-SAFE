@@ -10,6 +10,8 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 ChartJS.register(
   CategoryScale,
@@ -20,6 +22,7 @@ ChartJS.register(
   Title
 );
 
+const CO_TOAST_ID = "co-toast-id";
 function formatDateTimeForChart(dateTimeString) {
   return new Date(dateTimeString).toLocaleString("en-IN", {
     timeZone: "Asia/Kolkata",
@@ -102,6 +105,25 @@ const CoLevel = () => {
         value: maxCoValue,
         time: maxCoTime,
       });
+
+      // for alert message
+      if (newValues[newValues.length - 1] > 35) {
+        const existingToast = toast.isActive(CO_TOAST_ID);
+
+        if (!existingToast) {
+          toast.error("CO Content High!", {
+            position: "top-right",
+            autoClose: false,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            toastId: CO_TOAST_ID,
+          });
+        }
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -110,7 +132,6 @@ const CoLevel = () => {
   useEffect(() => {
     fetchData();
     const intervalId = setInterval(fetchData, 3000);
-
     return () => {
       clearInterval(intervalId);
     };

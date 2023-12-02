@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
 import Articles from "./Pages/Articles";
 import Help from "./Pages/Help";
+import { ToastContainer } from "./Pages/Alert";
 
 // importing components
 import Navbar from "./Components/Navbar/Navbar";
@@ -27,6 +28,7 @@ function App() {
           </Routes>
         </main>
       </Router>
+      <ToastContainer />
     </div>
   );
 }
