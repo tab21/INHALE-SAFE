@@ -3,6 +3,7 @@ import { Menu, MenuItem } from "react-pro-sidebar";
 import { RiDashboardFill } from "react-icons/ri";
 import { HiOutlineNewspaper } from "react-icons/hi";
 import { BiSolidHelpCircle } from "react-icons/bi";
+import { FiSettings } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 
@@ -51,6 +52,14 @@ function Sidebars() {
           component={<Link to="/articles" />}
         >
           <Link to="/articles">Articles </Link>
+        </MenuItem>
+
+        <MenuItem
+          className=" hover:text-mainBlue hover:rounded-md"
+          icon={<FiSettings size={30} />}
+          component={<Link to="/settings" />}
+        >
+          <Link to="/settings">Settings </Link>
         </MenuItem>
       </Menu>
 

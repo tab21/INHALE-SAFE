@@ -7,6 +7,7 @@ import Dashboard from "./Pages/Dashboard";
 import Articles from "./Pages/Articles";
 import Help from "./Pages/Help";
 import { ToastContainer } from "./Pages/Alert";
+import Settings from "./Pages/Settings";
 
 // importing components
 import Navbar from "./Components/Navbar/Navbar";
@@ -24,6 +25,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/articles" element={<Articles />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="/help" element={<Help />} />
           </Routes>
         </main>
