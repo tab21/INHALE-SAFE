@@ -7,19 +7,16 @@
   --tr: all 0.25s ease 0s;
 }
 
-* {
-  box-sizing: border-box;
+.setting {
   transition: var(--tr);
-}
-body {
   overflow: hidden;
 }
+
 .controllers {
   margin: 0;
   padding: 0;
   width: 80vw;
   height: 80vh;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;

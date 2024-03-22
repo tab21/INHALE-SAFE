@@ -4,7 +4,7 @@ import smartplug from "../Assets/smart-plug.png";
 
 export default function Settings() {
   return (
-    <div className="p-5">
+    <div className="p-5 setting">
       <h1 className="font-bold text-mainBlue text-center text-3xl">Settings</h1>
       {/* for all controllers if added in future */}
       <div className="controllers">
