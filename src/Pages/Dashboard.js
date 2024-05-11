@@ -138,7 +138,7 @@ export default function Dashboard() {
           Data={DataTemp}
           Heading="Temperature"
           yaxis="Degree Celsius"
-          limit={40}
+          limit={50}
         />
         <Article {...TEMP_DATA[0]} />
       </div>
@@ -149,7 +149,7 @@ export default function Dashboard() {
           Data={DataHumidity}
           Heading="Humidity"
           yaxis="Percentage"
-          limit={50}
+          limit={100}
         />
         <Article {...HUMID_DATA[0]} />
       </div>
