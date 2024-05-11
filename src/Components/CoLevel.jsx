@@ -65,18 +65,18 @@ const CoLevel = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get("https://inhalesafe.vercel.app/api/get");
-      const newData = response.data.data;
+      const todayData = response.data.data;
 
       // Filter data for today
-      const today = new Date().toLocaleDateString("en-IN", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-      });
+      // const today = new Date().toLocaleDateString("en-IN", {
+      //   day: "numeric",
+      //   month: "short",
+      //   year: "numeric",
+      // });
 
-      const todayData = newData.filter((item) =>
-        formatDateTimeForChart(item.createdAt).startsWith(today)
-      );
+      // const todayData = newData.filter((item) =>
+      //   formatDateTimeForChart(item.createdAt).startsWith(today)
+      // );
 
       const newLabels = todayData.map((item) => getTimeFormat(item.createdAt));
       const newValues = todayData.map((item) => parseFloat(item.co_ppm));

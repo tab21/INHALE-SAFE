@@ -30,7 +30,21 @@ function App() {
           </Routes>
         </main>
       </Router>
-      <ToastContainer />
+
+      {/* container for alerts  */}
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        limit={4}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 }
