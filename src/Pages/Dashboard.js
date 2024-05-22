@@ -138,7 +138,7 @@ export default function Dashboard() {
           Data={DataTemp}
           Heading="Temperature"
           yaxis="Degree Celsius"
-          limit={50}
+          limit={100}
         />
         <Article {...TEMP_DATA[0]} />
       </div>

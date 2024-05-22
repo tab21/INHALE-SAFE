@@ -105,11 +105,7 @@ const Graph = ({ Data, Heading, yaxis, limit }) => {
     });
   }, [Data]);
 
-  useEffect(() => {
-    fetchData();
-    const intervalId = setInterval(fetchData, 5000);
-
-    // for alerts
+  const notify = () => {
     if (currentVal.value > limit) {
       console.log(
         `Alert: ${Heading} exceeded limit -------- ${currentVal.value}, ${limit}`
@@ -126,9 +122,18 @@ const Graph = ({ Data, Heading, yaxis, limit }) => {
         transition: Bounce,
       });
     }
+  };
+
+  useEffect(() => {
+    fetchData();
+    const intervalId = setInterval(fetchData, 3000);
+
+    // for alerts
+    const alertInterval = setInterval(notify, 10000);
 
     return () => {
       clearInterval(intervalId);
+      clearInterval(alertInterval);
     };
   }, [fetchData]);
 
