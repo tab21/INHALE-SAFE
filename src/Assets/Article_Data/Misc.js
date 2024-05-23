@@ -9,6 +9,28 @@ const MISC_DATA = [
     link: "https://www.weforum.org/agenda/2022/07/what-causes-indoor-air-pollution-sources-how-to-reduce/",
   },
   {
+    title: "How does the AQI work?",
+    para: `Think of the AQI as a yardstick that runs from 0 to 500. The higher the AQI value, the greater the level of air pollution and the greater the health concern. For example, an AQI value of 50 or below represents good air quality, while an AQI value over 300 represents hazardous air quality.
+
+    For each pollutant an AQI value of 100 generally corresponds to an ambient air concentration that equals the level of the short-term national ambient air quality standard for protection of public health. AQI values at or below 100 are generally thought of as satisfactory. When AQI values are above 100, air quality is unhealthy: at first for certain sensitive groups of people, then for everyone as AQI values get higher.
+    
+    The AQI is divided into six categories. Each category corresponds to a different level of health concern. Each category also has a specific color. The color makes it easy for people to quickly determine whether air quality is reaching unhealthy levels in their communities.`,
+    link: "https://www.airnow.gov/aqi/aqi-basics/#:~:text=The%20higher%20the%20AQI%20value%2C%20the%20greater%20the,AQI%20value%20over%20300%20represents%20hazardous%20air%20quality.",
+  },
+  {
+    title: "Understanding VOC Gas and Its Impact on the Environment",
+    para: `Volatile Organic Compounds (VOCs) are a group of organic chemicals that exhibit a high vapor pressure at room temperature, meaning they can quickly evaporate into the surrounding air. They originate from numerous sources, including natural emissions and various human activities – even though there are well-documented health concerns associated with VOC exposure. This article dives into the origins and effects of VOC gas on the environment and on human health.
+
+    Unravelling the Origins of VOC Gas
+    VOCs originate from a wide range of sources, both natural and anthropogenic. Some natural sources of VOCs include emissions from plants and trees, while human-made sources encompass a diverse array of products and industries:
+    
+    Building materials: Many construction materials like paints, adhesives, and varnishes release VOCs into the indoor air.
+    Household products: Cleaning agents, air fresheners, and cosmetics are common sources of VOCs in the home.
+    Office equipment: Printers, photocopiers, and computers can emit VOCs during operation.
+    Industrial processes: The oil and gas sector, dry cleaning industry, and manufacturing plants all contribute to VOC emissions.`,
+    link: "https://www.environmental-expert.com/articles/understanding-voc-gas-and-its-impact-on-the-environment-1108358#:~:text=Exposure%20to%20VOCs%20can%20lead%20to%20both%20short-term,issues%2C%20liver%20and%20kidney%20damage%2C%20and%20even%20cancer.",
+  },
+  {
     title: "Impacts on health equity, development and climate change",
     para: `Significant policy changes are needed to rapidly increase the number of people with access to clean fuels and technologies by 2030 to address health inequities, achieve the 2030 Agenda for Sustainable Development, and mitigate climate change.
 

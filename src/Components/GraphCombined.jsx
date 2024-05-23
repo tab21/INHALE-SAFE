@@ -55,6 +55,10 @@ const GraphCombined = ({ Data, Heading }) => {
   // console.log(Data);
 
   const [AQI, setAQI] = useState(0);
+  const [status, setStatus] = useState({
+    status: "Good",
+    color: "text-white",
+  });
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [
@@ -101,6 +105,32 @@ const GraphCombined = ({ Data, Heading }) => {
 
     // setting AQI value
     setAQI(Data.length > 0 ? Data[Data.length - 1].AQI : 0);
+    switch (true) {
+      case AQI < 50:
+        setStatus({ status: "Excellent", color: "text-lime-300" });
+        break;
+      case AQI < 100:
+        setStatus({ status: "Good", color: "text-green-300" });
+        break;
+      case AQI < 150:
+        setStatus({ status: "Lightly Polluted", color: "text-yellow-300" });
+        break;
+      case AQI < 200:
+        setStatus({ status: "Moderately Polluted", color: "text-red-400" });
+        break;
+      case AQI < 250:
+        setStatus({ status: "Heavily Polluted", color: "text-indigo-400" });
+        break;
+      case AQI < 300:
+        setStatus({ status: "Severely Polluted", color: "text-pink-300" });
+        break;
+      case AQI > 300:
+        setStatus({ status: "Extremely POlluted", color: "text-purple-300" });
+        break;
+      default:
+        setStatus({ status: "Hazardous", color: "text-black" });
+        break;
+    }
   }, [Data]);
 
   useEffect(() => {
@@ -155,6 +185,7 @@ const GraphCombined = ({ Data, Heading }) => {
             <p>
               <span className="text-2xl">{AQI}</span>
             </p>
+            <p className={`${status.color}`}>STATUS-{status.status}</p>
           </div>
         </div>
 

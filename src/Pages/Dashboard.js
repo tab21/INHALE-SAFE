@@ -23,11 +23,25 @@ export default function Dashboard() {
   const [DataTemp, setDataTemp] = useState([]);
   const [DataHumidity, setDataHumidity] = useState([]);
   const [DataCombined, setDataCombined] = useState([]);
+  const [DataAqi, setDataAqi] = useState([]);
+  const [DataVOC, setDataVOC] = useState([]);
 
   const [selectedOption, setSelectedOption] = useState(24);
+  const [time, setTime] = useState("Day");
 
   const handleChange = (e) => {
     setSelectedOption(e.target.value);
+    switch (e.target.value) {
+      case 24:
+        setTime("Day");
+        break;
+      case 1:
+        setTime("Day");
+        break;
+      default:
+        setTime("Month");
+        break;
+    }
   };
 
   const fetchData = async () => {
@@ -39,25 +53,35 @@ export default function Dashboard() {
       // Get the current date and time
       const currentTime = new Date();
 
-      // Calculate the time 24 hours ago
+      // Calculate the time needed to go back based on the selected option
       const twentyFourHoursAgo = new Date(
         currentTime.getTime() - selectedOption * 60 * 60 * 1000
       );
 
-      // Filter data for the last 24 hours
-      const last24HourData = data.filter((obj) => {
+      // Filter data based on the time
+      let last24HourData = data.filter((obj) => {
         const timestamp = new Date(obj.Timestamp);
         return timestamp >= twentyFourHoursAgo;
       });
-      setDataCombined(last24HourData);
-
       // console.log(last24HourData);
 
+      // limiting data due to garbage values
+      last24HourData = last24HourData.map((item) => {
+        item.CO = item.CO > 15 ? 15 : item.CO;
+        item.CO2 = item.CO2 > 1000 ? 1000 : item.CO2;
+        item.Temperature = item.Temperature > 70 ? 70 : item.Temperature;
+        item.Humidity = item.Humidity > 100 ? 100 : item.Humidity;
+        item.VOC = item.VOC > 2 ? 2 : item.VOC;
+        return item;
+      });
+      setDataCombined(last24HourData);
+
       //collecting CO data
-      const co = last24HourData.map(({ Timestamp, CO }) => ({
+      let co = last24HourData.map(({ Timestamp, CO }) => ({
         Timestamp,
         key: CO,
       }));
+
       setDataCO(co);
 
       //collecting CO2 data
@@ -65,6 +89,7 @@ export default function Dashboard() {
         Timestamp,
         key: CO2,
       }));
+
       setDataCO2(co2);
 
       //collecting temp data
@@ -72,6 +97,7 @@ export default function Dashboard() {
         Timestamp,
         key: Temperature,
       }));
+
       setDataTemp(temp);
 
       //collecting Humidity data
@@ -79,7 +105,22 @@ export default function Dashboard() {
         Timestamp: Timestamp,
         key: Humidity,
       }));
+
       setDataHumidity(humidity);
+
+      const aqi = last24HourData.map(({ Timestamp, AQI }) => ({
+        Timestamp: Timestamp,
+        key: AQI,
+      }));
+
+      setDataAqi(aqi);
+
+      const voc = last24HourData.map(({ Timestamp, VOC }) => ({
+        Timestamp: Timestamp,
+        key: VOC,
+      }));
+
+      setDataVOC(voc);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -88,7 +129,7 @@ export default function Dashboard() {
   // for fetching data every 3 seconds
   useEffect(() => {
     fetchData();
-    const intervalId = setInterval(fetchData, 3000);
+    const intervalId = setInterval(fetchData, 5000);
     return () => {
       clearInterval(intervalId);
     };
@@ -108,6 +149,7 @@ export default function Dashboard() {
           onChange={handleChange}
           className="px-4 py-2 rounded-md bg-gray-200 focus:outline-none"
         >
+          <option value={24 * 30}>Last 1 Month</option>
           <option value={7 * 24}>Last 7 days</option>
           <option value={24}>Last 24 Hours</option>
           <option value={1}>Last 1 Hour</option>
@@ -122,14 +164,20 @@ export default function Dashboard() {
 
       {/* getting Co chart and info  */}
       <div className="flex w-full">
-        <Graph Data={DataCO} Heading="CO" yaxis="PPM" limit={15.5} />
+        <Graph Data={DataCO} Heading="CO" yaxis="PPM" limit={7} />
         <Article {...CO_DATA[0]} />
       </div>
 
       {/* getting Co2 chart and info  */}
       <div className="flex w-full">
-        <Graph Data={DataCO2} Heading="CO2" yaxis="PPM" limit={430} />
+        <Graph Data={DataCO2} Heading="CO2" yaxis="PPM" limit={800} />
         <Article {...CO2_DATA[0]} />
+      </div>
+
+      {/* getting VOC chart and info */}
+      <div className="flex w-full">
+        <Graph Data={DataVOC} Heading="VOC" yaxis="PPM" limit={1} />
+        <Article {...MISC_DATA[2]} />
       </div>
 
       {/* getting temperature chart and info  */}
@@ -138,7 +186,7 @@ export default function Dashboard() {
           Data={DataTemp}
           Heading="Temperature"
           yaxis="Degree Celsius"
-          limit={100}
+          limit={55}
         />
         <Article {...TEMP_DATA[0]} />
       </div>
@@ -149,9 +197,15 @@ export default function Dashboard() {
           Data={DataHumidity}
           Heading="Humidity"
           yaxis="Percentage"
-          limit={100}
+          limit={70}
         />
         <Article {...HUMID_DATA[0]} />
+      </div>
+
+      {/* getting AQI chart and info */}
+      <div className="flex w-full">
+        <Graph Data={DataAqi} Heading="AQI" yaxis=" " limit={150} />
+        <Article {...MISC_DATA[1]} />
       </div>
     </div>
   );

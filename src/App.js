@@ -34,7 +34,7 @@ function App() {
       {/* container for alerts  */}
       <ToastContainer
         position="top-right"
-        autoClose={1000}
+        autoClose={100}
         limit={1}
         hideProgressBar={false}
         newestOnTop={false}

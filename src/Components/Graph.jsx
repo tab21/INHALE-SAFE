@@ -43,8 +43,9 @@ const getTimeFormat = (time) => {
 
 // start of graph component
 const Graph = ({ Data, Heading, yaxis, limit }) => {
-  // console.log(Data);
+  // console.log(Heading, Data);
 
+  // for setting chart data
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [
@@ -110,30 +111,30 @@ const Graph = ({ Data, Heading, yaxis, limit }) => {
       console.log(
         `Alert: ${Heading} exceeded limit -------- ${currentVal.value}, ${limit}`
       );
-      toast.warn(`${Heading} exceeded limit`, {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-      });
+      // toast.warn(`${Heading} exceeded limit`, {
+      //   position: "top-right",
+      //   autoClose: 1000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "dark",
+      //   transition: Bounce,
+      // });
     }
   };
 
   useEffect(() => {
     fetchData();
-    const intervalId = setInterval(fetchData, 3000);
-
     // for alerts
-    const alertInterval = setInterval(notify, 10000);
+    notify();
+    // const alertInterval = setInterval(notify, 10000);
+    const intervalId = setInterval(fetchData, 5000);
 
     return () => {
       clearInterval(intervalId);
-      clearInterval(alertInterval);
+      // clearInterval(alertInterval);
     };
   }, [fetchData]);
 
